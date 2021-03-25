@@ -1,11 +1,11 @@
 
 
-const Login = ()=>{
+const Login = (props)=>{
 
     return (
         <div>
             <form className='form container' onSubmit={''}>
-
+                <h2>Login</h2>
                 <label className='text-field'>Username
                 <input  
                     name='username' 
