@@ -10,8 +10,8 @@ function App() {
   return (
     <div className="App">
       <nav className='navbar'>
-        <Link><button>Login</button></Link>
-        <Link><button>Signup</button></Link>
+        <Link to='/login'><button>Login</button></Link>
+        <Link to='/signup'><button>Signup</button></Link>
       </nav>
 
       <div className='Site_Container'>
