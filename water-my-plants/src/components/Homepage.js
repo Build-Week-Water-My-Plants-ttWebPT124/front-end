@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 import banner from '../assets/Banner.jfif'
 import feature1 from '../assets/feature-1.jpg';
 import feature2 from '../assets/feature-2.png';

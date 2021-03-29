@@ -1,3 +1,4 @@
+import React from 'react'
 
 const Signup = (props)=>{
 
@@ -6,18 +7,26 @@ const Signup = (props)=>{
         submit,
         change,
         errors,
+        disabled,
       } = props
+
+    const onSubmit = evt => {
+        evt.preventDefault()
+        submit()
+      }
 
     const onChange = evt => {
     
-        const { name, value, type } = evt.target
+        const { name, value, checked, type  } = evt.target
+
+        const val = type ==='checkbox' ? checked : value
   
-        change(name)
+        change(name, val)
      }
 
     return (
         <div className='form'>
-            <form className='form container' onSubmit={''}>
+            <form className='form container' onSubmit={onSubmit}>
                 <h2>Sign Up!</h2>
                 <div className='errors'>
                     <div>{errors.username}</div>
@@ -40,6 +49,7 @@ const Signup = (props)=>{
                         name='phonenumber' 
                         type='text' />  
                 </label>
+
                 <label className='text-field'>Password
                     <input  
                         value={values.password}
@@ -48,7 +58,7 @@ const Signup = (props)=>{
                         type='text' />
                 </label>
 
-                <button>Sign Up</button>
+                <button disabled={disabled}>Sign Up</button>
             </form>
         </div>
     )
