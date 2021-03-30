@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import { Route, Link, useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 import formSchema from './validation/formSchema'
-import logo from './assets/logo.png'
 import axios from 'axios'
 
 import Homepage from './components/Homepage';
@@ -15,10 +14,13 @@ import PlantsList from './components/PlantsList'
 // Plant DashBoard
   const plantList = [{nickname:'testplant', species:'test species', h2oFrequency: 'Calculating...',}]
   const initialPlantValues = {
+    id:'',
     nickname: '',
     species : '',
     h2oFrequency: 'Calculating...',
     //image: logo,
+
+    
   }
 // End of Plant DashBoard
 
@@ -56,6 +58,10 @@ function App() {
 
   const [plantForms, setPlantForms] = useState(initialPlantValues)
 
+  plant.forEach((item, i) => {
+    item.id = i + 1;
+  })
+
   const updatePlantForm = (inputName, inputValue) => {
     setPlantForms({...plantForms, [inputName]: inputValue})
   }
@@ -68,8 +74,11 @@ function App() {
 
     setPlant([...plant, newPlant])
     setPlantForms(initialPlantValues)
-    console.log(plant)
   }
+
+  useEffect(()=>{
+    console.log(plant)
+  },[plant])
 
   //End of Plant Dash Board
 

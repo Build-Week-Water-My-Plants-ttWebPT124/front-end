@@ -1,5 +1,18 @@
 import React from 'react'
 
+const removeByAttr = function(arr, attr, value){
+    var i = arr.length;
+    while(i--){
+       if( arr[i] 
+           && arr[i].hasOwnProperty(attr) 
+           && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+           arr.splice(i,1);
+       }
+    }
+    return arr;
+}
+
 
 const PlantsList = (props) => {
 
@@ -15,7 +28,7 @@ const PlantsList = (props) => {
 
             <div>
                 {plantsList.map((data, i)=>{
-                    return(<Plants key={i} plants ={ data } />)
+                    return(<Plants key={i} plants ={ data } list={plantsList} />)
                 })}
             </div>
         </div>
@@ -24,13 +37,15 @@ const PlantsList = (props) => {
 
 const Plants = (props) =>{
 
-    const { plants } = props
+    const { plants, list } = props
 
     return (
         <div>
             <h2>{plants.nickname}</h2>
             <p>Species: {plants.species}</p>
             <p>h2oFrequency: Calculating... </p>
+            <a href=''>Details</a>
+            <button onClick={()=>{removeByAttr(list,'id',plants.id)}}>Delete</button>
         </div>
     )
 }
