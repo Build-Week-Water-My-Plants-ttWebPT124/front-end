@@ -10,10 +10,19 @@ import Homepage from './components/Homepage';
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Nav from './components/Nav'
+import PlantsList from './components/PlantsList'
 
+// Plant DashBoard
+  const plantList = []
+  const initialPlantValues = {
+    nickname: '',
+    species : '',
+    h2oFrequency: 'Calculating...',
+    image: logo,
+  }
+// End of Plant DashBoard
 
-
-
+// Signup Form
 const initialFormValues = {
   
   username: '',
@@ -34,6 +43,7 @@ const initialFormErrors = {
 
 const initialUsers = []
 const initialDisabled = true
+// End of Signup Form
 
 
 
@@ -41,6 +51,29 @@ function App() {
 
   let history = useHistory()
 
+  //Plant Dash Board 
+  const [plant, setPlant] = useState(plantList)
+
+  const [plantForms, setPlantForms] = useState(initialPlantValues)
+
+  const updatePlantForm = (inputName, inputValue) => {
+    setPlantForms({...plantForms, [inputName]: inputValue})
+  }
+
+  const submitPlant = () => {
+    const newPlant = {
+      nickname: plantForms.nickname.trim(),
+      species: plantForms.species.trim(),
+    }
+
+    setPlant([...plant, newPlant])
+    setPlantForms(initialPlantValues)
+    console.log(newPlant)
+  }
+
+  //End of Plant Dash Board
+
+  // Signup Form
   const [users, setUsers] = useState(initialUsers)
   const [formValues, setFormValues] = useState(initialFormValues) 
   const [formErrors, setFormErrors] = useState(initialFormErrors)
@@ -90,6 +123,7 @@ function App() {
     formSchema.isValid(formValues)
     .then(valid => setDisabled(!valid))
   }, [formValues])
+  // End of Signup Form
 
   useEffect(()=>{
     console.log(users)
@@ -101,7 +135,7 @@ function App() {
 
 
       <Nav />
-      <div className='Site_Container' style={{backgroundColor: 'darkgreen', 
+      <div className='Site_Container' style={{backgroundColor: '',
                                               width: '100%', 
                                               display:'flex',
                                               justifyContent: 'space-around'}}>
@@ -120,6 +154,15 @@ function App() {
             errors={formErrors} 
             submit={signupSubmit} 
             disabled={disabled}
+          />
+        </Route>
+
+        <Route>
+          <PlantsList 
+            plantsList={plant}
+            plantValues={plantForms} 
+            plantUpdate={updatePlantForm}
+            plantSubmit={submitPlant}
           />
         </Route>
 
