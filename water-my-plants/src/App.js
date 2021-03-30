@@ -13,12 +13,12 @@ import Nav from './components/Nav'
 import PlantsList from './components/PlantsList'
 
 // Plant DashBoard
-  const plantList = []
+  const plantList = [{nickname:'testplant', species:'test species', h2oFrequency: 'Calculating...',}]
   const initialPlantValues = {
     nickname: '',
     species : '',
     h2oFrequency: 'Calculating...',
-    image: logo,
+    //image: logo,
   }
 // End of Plant DashBoard
 
@@ -68,7 +68,7 @@ function App() {
 
     setPlant([...plant, newPlant])
     setPlantForms(initialPlantValues)
-    console.log(newPlant)
+    console.log(plant)
   }
 
   //End of Plant Dash Board
@@ -157,7 +157,7 @@ function App() {
           />
         </Route>
 
-        <Route>
+        <Route path='/plantsgit '>
           <PlantsList 
             plantsList={plant}
             plantValues={plantForms} 

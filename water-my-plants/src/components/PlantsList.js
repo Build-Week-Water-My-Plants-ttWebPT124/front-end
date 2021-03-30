@@ -1,8 +1,6 @@
 import React from 'react'
 
 
-
-
 const PlantsList = (props) => {
 
     const { plantsList, plantValues, plantUpdate, plantSubmit } = props
@@ -14,9 +12,10 @@ const PlantsList = (props) => {
                 update={plantUpdate}
                 submit={plantSubmit}
             />
+
             <div>
                 {plantsList.map((data, i)=>{
-                    <Plants key={i} plants ={data} />
+                    return(<Plants key={i} plants ={ data } />)
                 })}
             </div>
         </div>
@@ -29,9 +28,9 @@ const Plants = (props) =>{
 
     return (
         <div>
-            <h2>{plants.name}</h2>
-            <p>Email: {plants.email}</p>
-            <p>Role: {plants.role}</p>
+            <h2>{plants.nickname}</h2>
+            <p>Species: {plants.species}</p>
+            <p>h2oFrequency: Calculating... </p>
         </div>
     )
 }
