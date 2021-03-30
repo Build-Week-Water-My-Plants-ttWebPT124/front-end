@@ -157,7 +157,7 @@ function App() {
           />
         </Route>
 
-        <Route path='/plantsgit '>
+        <Route path='/plantlist'>
           <PlantsList 
             plantsList={plant}
             plantValues={plantForms} 
