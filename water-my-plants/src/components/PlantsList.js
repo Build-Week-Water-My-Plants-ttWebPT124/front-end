@@ -16,7 +16,7 @@ const removeByAttr = function(arr, attr, value){
 
 const PlantsList = (props) => {
 
-    const { plantsList, plantValues, plantUpdate, plantSubmit } = props
+    const { plantsList, plantValues, plantUpdate, plantSubmit, removePlant } = props
 
     return(
         <div>
@@ -28,7 +28,12 @@ const PlantsList = (props) => {
 
             <div>
                 {plantsList.map((data, i)=>{
-                    return(<Plants key={i} plants ={ data } list={plantsList} />)
+                    return(<Plants 
+                        key={i} 
+                        plants ={ data } 
+                        list={plantsList} 
+                        remove={removePlant}
+                        list={plantsList} />)
                 })}
             </div>
         </div>
@@ -37,7 +42,11 @@ const PlantsList = (props) => {
 
 const Plants = (props) =>{
 
-    const { plants, list } = props
+    const { plants, list, remove } = props
+
+    const deletePlant = (currentID) =>{
+        remove(currentID)
+    }
 
     return (
         <div>
@@ -45,7 +54,7 @@ const Plants = (props) =>{
             <p>Species: {plants.species}</p>
             <p>h2oFrequency: Calculating... </p>
             <a href=''>Details</a>
-            <button onClick={()=>{removeByAttr(list,'id',plants.id)}}>Delete</button>
+            <button onClick={() => deletePlant(plants.id)}>Delete</button>
         </div>
     )
 }

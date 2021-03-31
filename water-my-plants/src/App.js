@@ -19,9 +19,20 @@ import PlantsList from './components/PlantsList'
     species : '',
     h2oFrequency: 'Calculating...',
     //image: logo,
-
-    
   }
+
+  const removeByAttr = function(arr, attr, value){
+    var i = arr.length;
+    while(i--){
+       if( arr[i] 
+           && arr[i].hasOwnProperty(attr) 
+           && (arguments.length > 2 && arr[i][attr] === value ) ){ 
+
+           arr.splice(i,1);
+       }
+    }
+    return arr;
+}
 // End of Plant DashBoard
 
 // Signup Form
@@ -61,6 +72,11 @@ function App() {
   plant.forEach((item, i) => {
     item.id = i + 1;
   })
+
+
+  const deletePlant = (currentID) =>{
+    setPlant(plant.filter((i) =>{return i.id !== currentID}))
+  }
 
   const updatePlantForm = (inputName, inputValue) => {
     setPlantForms({...plantForms, [inputName]: inputValue})
@@ -172,6 +188,7 @@ function App() {
             plantValues={plantForms} 
             plantUpdate={updatePlantForm}
             plantSubmit={submitPlant}
+            removePlant={deletePlant}
           />
         </Route>
 
