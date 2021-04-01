@@ -1,17 +1,5 @@
 import React from 'react'
-
-const removeByAttr = function(arr, attr, value){
-    var i = arr.length;
-    while(i--){
-       if( arr[i] 
-           && arr[i].hasOwnProperty(attr) 
-           && (arguments.length > 2 && arr[i][attr] === value ) ){ 
-
-           arr.splice(i,1);
-       }
-    }
-    return arr;
-}
+import { Link } from 'react-router-dom'
 
 
 const PlantsList = (props) => {
@@ -20,6 +8,7 @@ const PlantsList = (props) => {
 
     return(
         <div>
+            <h1>My Plants</h1>
             <PlantsForm 
                 values={plantValues}
                 update={plantUpdate}
@@ -42,7 +31,7 @@ const PlantsList = (props) => {
 
 const Plants = (props) =>{
 
-    const { plants, list, remove } = props
+    const { plants, remove } = props
 
     const deletePlant = (currentID) =>{
         remove(currentID)
@@ -50,10 +39,11 @@ const Plants = (props) =>{
 
     return (
         <div>
+            <img src={plants.image} style={{width: '100px'}} alt='img'/>
             <h2>{plants.nickname}</h2>
             <p>Species: {plants.species}</p>
             <p>h2oFrequency: Calculating... </p>
-            <a href=''>Details</a>
+            <Link to={`plant/${plants.id}`}><span>Details</span></Link>
             <button onClick={() => deletePlant(plants.id)}>Delete</button>
         </div>
     )

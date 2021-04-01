@@ -4,35 +4,24 @@ import { Route, Link, useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 import formSchema from './validation/formSchema'
 import axios from 'axios'
-
+import logo from './assets/logo.png';
 import Homepage from './components/Homepage';
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Nav from './components/Nav'
 import PlantsList from './components/PlantsList'
+import PlantDetails from './components/PlantDetails'
 
 // Plant DashBoard
-  const plantList = [{nickname:'testplant', species:'test species', h2oFrequency: 'Calculating...',}]
+  const plantList = [{nickname:'testplant', species:'test species', h2oFrequency: 'Calculating...', image:logo}]
   const initialPlantValues = {
     id:'',
     nickname: '',
     species : '',
     h2oFrequency: 'Calculating...',
-    //image: logo,
+    image: logo,
   }
 
-  const removeByAttr = function(arr, attr, value){
-    var i = arr.length;
-    while(i--){
-       if( arr[i] 
-           && arr[i].hasOwnProperty(attr) 
-           && (arguments.length > 2 && arr[i][attr] === value ) ){ 
-
-           arr.splice(i,1);
-       }
-    }
-    return arr;
-}
 // End of Plant DashBoard
 
 // Signup Form
@@ -43,7 +32,6 @@ const initialFormValues = {
   password: '',
 
 }
-
 
 const initialFormErrors = {
   username: '',
@@ -57,7 +45,6 @@ const initialFormErrors = {
 const initialUsers = []
 const initialDisabled = true
 // End of Signup Form
-
 
 
 function App() {
@@ -86,6 +73,8 @@ function App() {
     const newPlant = {
       nickname: plantForms.nickname.trim(),
       species: plantForms.species.trim(),
+      h2oFrequency: initialPlantValues.h2oFrequency,
+      image: initialPlantValues.image
     }
 
     setPlant([...plant, newPlant])
@@ -190,6 +179,10 @@ function App() {
             plantSubmit={submitPlant}
             removePlant={deletePlant}
           />
+        </Route>
+
+        <Route path='/plant/:plantID'>
+          <PlantDetails plants={plant} />
         </Route>
 
       </div>

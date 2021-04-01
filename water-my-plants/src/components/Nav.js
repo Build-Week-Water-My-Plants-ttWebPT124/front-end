@@ -11,13 +11,13 @@ const Nav = (props) => {
             {/* This part is giving me trouble getting the h1 to line up in the center with alignItems */}
             <div style={{display: 'flex', flexDirection: 'columns'}}>
                 <Link to='/' style={{width: '50px'}}><img className='logo' style={{height: '100%', width: 'auto'}} src={logo} alt='logo'/></Link>
-                <h1 style={{margin: 0}}>[Insert Title Here]</h1>
+                <h1 style={{margin: 0}}>Water My Plants</h1>
             </div>
             
             <div className='link-container' style={{display: 'flex', alignItems:'center'}}>
                 <Link to='/'><Navbutton>Home</Navbutton></Link>
-                <Link to='/'><Navbutton>About</Navbutton></Link>
-                <Link to='/plantlist'><Navbutton>Features</Navbutton></Link>
+                <Link to='/'><Navbutton>Account</Navbutton></Link>
+                <Link to='/plantlist'><Navbutton>My Plants</Navbutton></Link>
                 <Link to='/login'><Navbutton>Login</Navbutton></Link>
                 <Link to='/signup'><Navbutton>Signup</Navbutton></Link>
                     
