@@ -22,7 +22,7 @@ const PlantsList = (props) => {
                         plants ={ data } 
                         list={plantsList} 
                         remove={removePlant}
-                        list={plantsList} />)
+                         />)
                 })}
             </div>
         </div>

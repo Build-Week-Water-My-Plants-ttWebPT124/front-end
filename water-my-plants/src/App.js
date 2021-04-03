@@ -1,16 +1,18 @@
 import './App.css';
 import React, { useState, useEffect } from 'react'
-import { Route, Link, useHistory } from 'react-router-dom'
+import { Route, useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 import formSchema from './validation/formSchema'
 import axios from 'axios'
 import logo from './assets/logo.png';
+
 import Homepage from './components/Homepage';
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Nav from './components/Nav'
 import PlantsList from './components/PlantsList'
 import PlantDetails from './components/PlantDetails'
+
 
 // Plant DashBoard
   const plantList = [{nickname:'testplant', species:'test species', h2oFrequency: 'Calculating...', image:logo}]
@@ -21,6 +23,7 @@ import PlantDetails from './components/PlantDetails'
     h2oFrequency: 'Calculating...',
     image: logo,
   }
+
 
 // End of Plant DashBoard
 
@@ -80,6 +83,16 @@ function App() {
     setPlant([...plant, newPlant])
     setPlantForms(initialPlantValues)
   }
+
+ const plantEdit = (currentID) =>{
+   var data = [...plant];
+   var index = data.findIndex(obj => obj.id === currentID);
+   data[index].nickname = plantForms.nickname.trim();
+   data[index].species = plantForms.species.trim();
+
+   setPlant( data )
+   setPlantForms(initialPlantValues)
+ }
 
   useEffect(()=>{
     console.log(plant)
@@ -182,7 +195,11 @@ function App() {
         </Route>
 
         <Route path='/plant/:plantID'>
-          <PlantDetails plants={plant} />
+          <PlantDetails 
+            plants={plant} 
+            editValues={plantForms} 
+            editUpdate={updatePlantForm} 
+            editSubmit={plantEdit} />
         </Route>
 
       </div>
