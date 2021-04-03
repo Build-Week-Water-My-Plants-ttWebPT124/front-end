@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Route, useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 import formSchema from './validation/formSchema'
+import userFormSchema from './validation/userFormSchema'
 import plantFormSchema from './validation/plantFormSchema'
 import axios from 'axios'
 import logo from './assets/logo.png';
@@ -13,6 +14,7 @@ import Signup from './components/Signup'
 import Nav from './components/Nav'
 import PlantsList from './components/PlantsList'
 import PlantDetails from './components/PlantDetails'
+import UserDetails from './components/UserDetails'
 
 
 // Plant DashBoard
@@ -62,7 +64,7 @@ function App() {
 
   let history = useHistory()
 
-  //Plant Dash Board 
+  //Plant DashBoard 
   const [plant, setPlant] = useState(plantList)
 
   const [plantForms, setPlantForms] = useState(initialPlantValues)
@@ -177,6 +179,37 @@ useEffect(() => {
   }, [formValues])
   // End of Signup Form
 
+    //User Account
+    const test = {
+
+      username: 'TestUser101',
+  
+      phonenumber: '1234567890',
+  
+      password: 'password',
+  
+    }
+
+    const [testuser, setTestUser] =useState(test)
+  
+    const editUser = () =>{
+        const newUser = {
+          username: testuser.username,
+  
+          phonenumber: formValues.phonenumber.trim(),
+    
+          password: formValues.password.trim(),
+        }
+        setTestUser(newUser)
+    }
+    
+    useEffect(() => {
+      userFormSchema.isValid(formValues)
+      .then(valid => setDisabled(!valid))
+    }, [formValues])
+  
+    //End of User Account
+
   useEffect(()=>{
     console.log(users)
   },[users])
@@ -206,6 +239,18 @@ useEffect(() => {
             errors={formErrors} 
             submit={signupSubmit} 
             disabled={disabled}
+          />
+        </Route>
+
+        <Route path='/user'>
+          <UserDetails 
+            user ={testuser} 
+            values={formValues}
+            change={inputChange} 
+            errors={formErrors}
+            submit={editUser}
+            disabled={disabled}
+
           />
         </Route>
 

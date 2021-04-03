@@ -16,7 +16,7 @@ const Nav = (props) => {
             
             <div className='link-container' style={{display: 'flex', alignItems:'center'}}>
                 <Link to='/'><Navbutton>Home</Navbutton></Link>
-                <Link to='/'><Navbutton>Account</Navbutton></Link>
+                <Link to='/user'><Navbutton>Account</Navbutton></Link>
                 <Link to='/plantlist'><Navbutton>My Plants</Navbutton></Link>
                 <Link to='/login'><Navbutton>Login</Navbutton></Link>
                 <Link to='/signup'><Navbutton>Signup</Navbutton></Link>

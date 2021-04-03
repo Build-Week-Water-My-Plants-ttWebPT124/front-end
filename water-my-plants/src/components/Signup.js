@@ -55,7 +55,7 @@ const Signup = (props)=>{
                         value={values.password}
                         onChange={onChange} 
                         name='password' 
-                        type='text' />
+                        type='password' />
                 </label>
 
                 <button disabled={disabled}>Sign Up</button>

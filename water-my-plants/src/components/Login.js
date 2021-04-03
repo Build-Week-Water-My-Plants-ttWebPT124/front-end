@@ -15,7 +15,7 @@ const Login = (props)=>{
                 <label className='text-field'>Password
                 <input  
                     name='password' 
-                    type='text' />
+                    type='password' />
                 </label>
 
                 <button>Sign Up</button>
