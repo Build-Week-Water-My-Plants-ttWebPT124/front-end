@@ -4,7 +4,7 @@ const formSchema = yup.object().shape({
     username: yup
         .string()
         .trim()
-        .min(6, 'Name must be 2 characters long')
+        .min(6, 'Name must be atleast 6 characters long')
         .required('Username is required'),
 
     phonenumber: yup
@@ -18,8 +18,9 @@ const formSchema = yup.object().shape({
         .string()
         .trim()
         .required('Password is required')
-        .min(2, 'Password must be 5 characters long'),
+        .min(2, 'Password must be atleast 5 characters long'),
 
 })
+
 
 export default formSchema;

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { Route, useHistory } from 'react-router-dom'
 import * as yup from 'yup'
 import formSchema from './validation/formSchema'
+import plantFormSchema from './validation/plantFormSchema'
 import axios from 'axios'
 import logo from './assets/logo.png';
 
@@ -22,6 +23,13 @@ import PlantDetails from './components/PlantDetails'
     species : '',
     h2oFrequency: 'Calculating...',
     image: logo,
+  }
+
+  const initialPlantErrors = {
+    nickname: '',
+  
+    species: '',
+  
   }
 
 
@@ -58,6 +66,8 @@ function App() {
   const [plant, setPlant] = useState(plantList)
 
   const [plantForms, setPlantForms] = useState(initialPlantValues)
+  const [plantErrors, setPlantErrors] = useState(initialPlantErrors)
+  const [disabled, setDisabled] = useState(initialDisabled) 
 
   plant.forEach((item, i) => {
     item.id = i + 1;
@@ -70,6 +80,15 @@ function App() {
 
   const updatePlantForm = (inputName, inputValue) => {
     setPlantForms({...plantForms, [inputName]: inputValue})
+    yup.reach(plantFormSchema, inputName)
+    .validate(inputValue)
+    .then(() => {
+      setPlantErrors({...plantErrors, [inputName]: ''})
+    })
+    .catch(err => {
+      setPlantErrors({...plantErrors, [inputName]: err.errors[0]})
+    })
+      setPlantErrors({...plantErrors, [inputName]: inputValue})
   }
 
   const submitPlant = () => {
@@ -94,6 +113,12 @@ function App() {
    setPlantForms(initialPlantValues)
  }
 
+
+useEffect(() => {
+  plantFormSchema.isValid(plantForms)
+  .then(valid => setDisabled(!valid))
+}, [plantForms])
+
   useEffect(()=>{
     console.log(plant)
   },[plant])
@@ -104,7 +129,7 @@ function App() {
   const [users, setUsers] = useState(initialUsers)
   const [formValues, setFormValues] = useState(initialFormValues) 
   const [formErrors, setFormErrors] = useState(initialFormErrors)
-  const [disabled, setDisabled] = useState(initialDisabled) 
+  
 
   const postNewUsers = newUser => {
   
@@ -191,6 +216,8 @@ function App() {
             plantUpdate={updatePlantForm}
             plantSubmit={submitPlant}
             removePlant={deletePlant}
+            plantErrors={plantErrors}
+            disabled={disabled}
           />
         </Route>
 
@@ -199,7 +226,9 @@ function App() {
             plants={plant} 
             editValues={plantForms} 
             editUpdate={updatePlantForm} 
-            editSubmit={plantEdit} />
+            editSubmit={plantEdit} 
+            disabled={disabled}
+            />
         </Route>
 
       </div>

@@ -6,7 +6,7 @@ import {
 
 const PlantDetails = (props) => {
 
-    const { plants, editValues, editUpdate, editSubmit } = props
+    const { plants, editValues, editUpdate, editSubmit, disabled } = props
     const { plantID } = useParams()
     const plant = plants.find(plant => plant.id == plantID)
 
@@ -26,7 +26,7 @@ const PlantDetails = (props) => {
                     values={editValues} 
                     update={editUpdate} 
                     edit={editSubmit} 
-                    //disabled={disabled}
+                    disabled={disabled}
                     // errors={formErrors}  
                />
             </div>
@@ -36,7 +36,7 @@ const PlantDetails = (props) => {
 
 const PlantsEditDetails = (props)=>{
 
-    const {plants, values, update, edit } = props
+    const {plants, values, update, edit, disabled } = props
 
     const onChange = evt => {
         const { name, value } = evt.target
@@ -71,7 +71,7 @@ const PlantsEditDetails = (props)=>{
                         />  
                     </label>
                     <div className='submit'>
-                        <button > Save Changes</button>
+                        <button disabled={disabled}> Save Changes</button>
                     </div>
                 </div>
             </form>

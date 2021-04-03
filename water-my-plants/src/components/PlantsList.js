@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const PlantsList = (props) => {
 
-    const { plantsList, plantValues, plantUpdate, plantSubmit, removePlant } = props
+    const { plantsList, plantValues, plantUpdate, plantSubmit, removePlant, plantErrors, disabled } = props
 
     return(
         <div>
@@ -13,6 +13,8 @@ const PlantsList = (props) => {
                 values={plantValues}
                 update={plantUpdate}
                 submit={plantSubmit}
+                errors={plantErrors}
+                disabled={disabled}
             />
 
             <div>
@@ -41,8 +43,6 @@ const Plants = (props) =>{
         <div>
             <img src={plants.image} style={{width: '100px'}} alt='img'/>
             <h2>{plants.nickname}</h2>
-            <p>Species: {plants.species}</p>
-            <p>h2oFrequency: Calculating... </p>
             <Link to={`plant/${plants.id}`}><span>Details</span></Link>
             <button onClick={() => deletePlant(plants.id)}>Delete</button>
         </div>
@@ -51,7 +51,7 @@ const Plants = (props) =>{
 
 const PlantsForm = (props) => {
 
-    const { values, update, submit } = props
+    const { values, errors, update, submit, disabled } = props
 
     const onChange = evt => {
         const { name, value } = evt.target
@@ -66,6 +66,10 @@ const PlantsForm = (props) => {
     return(
         <form className='form container' onSubmit={onSubmit}>
                 <div>
+                <div className='errors'>
+                    <div>{errors.nickname}</div>
+                    <div>{errors.species}</div>
+                </div>
                     <label> Nickname:
                         <input 
                             type='text' 
@@ -87,7 +91,7 @@ const PlantsForm = (props) => {
                         />  
                     </label>
                     <div className='submit'>
-                        <button>Add Plant</button>
+                        <button disabled={disabled}>Add Plant</button>
                     </div>
                 </div>
             </form>
